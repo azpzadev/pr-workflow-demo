@@ -1,0 +1,9 @@
+# ဖိုင်တစ်ခုချင်းစီအတွက် default reviewer သတ်မှတ်တာ။
+# PR ဖွင့်တာနဲ့ GitHub က ဒီလူတွေကို အလိုအလျောက် review တောင်းပေးတယ်။
+
+*                       @azpzadev
+
+# ဥပမာ — team ကြီးလာရင် ဒီလိုခွဲပါ
+# app/Services/         @azpzadev @backend-lead
+# database/migrations/  @db-owner
+# .github/              @azpzadev
