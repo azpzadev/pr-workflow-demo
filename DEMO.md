@@ -18,6 +18,31 @@ composer install
 
 **၂-၃ ခါ လေ့ကျင့်ပါ။** ကြားထဲ ပြန်စချင်ရင် — `./scripts/reset-demo.sh`
 
+> ### ⚠️ Approval အကြောင်း — မဖြစ်မနေ ဖတ်ပါ
+>
+> GitHub မှာ **ကိုယ့် PR ကို ကိုယ်တိုင် approve လုပ်လို့ မရပါဘူး**။ ဒါကြောင့် ဒီ repo မှာ
+> `required_approving_review_count` ကို **0** ထားပါတယ် — တစ်ယောက်တည်း demo လုပ်လို့ရအောင်။
+>
+> ဒါပေမဲ့ ကျန်တဲ့ gate တွေ အားလုံး ဒီအတိုင်း ရှိနေသေးတယ် —
+> CI အောင်မှ merge ရတယ်၊ main ကို တိုက်ရိုက် push မရဘူး (Act 5 punchline မပျက်ပါဘူး)။
+>
+> **Act 4 မှာ ပြောရမယ့်စကား:** “ဒီ repo မှာ approval 0 ထားတာက ကျွန်တော် တစ်ယောက်တည်း
+> ဖြစ်လို့ပါ။ ခင်ဗျားတို့ team မှာတော့ **1 ထားပါ** — Settings ထဲမှာ ဒီလိုပါပဲ။”
+> (ပြီးရင် Settings → Branches page ကို ဖွင့်ပြပါ)
+>
+> ရှေ့တင်မှာ လုပ်ဖော်ကိုင်ဖက် တစ်ယောက် ရှိရင် — သူ့ကို collaborator ထည့်ပြီး
+> live approve ခိုင်းတာက ပိုအားရစရာကောင်းပါတယ်။ အဲဒါဆိုရင် approvals ကို 1 ပြန်ထားပါ:
+> ```bash
+> gh api -X PUT repos/azpzadev/pr-workflow-demo/branches/main/protection \
+>   --input - <<'JSON'
+> { "required_status_checks": {"strict": true, "contexts": ["Pest tests", "Pint (code style)"]},
+>   "enforce_admins": true,
+>   "required_pull_request_reviews": {"required_approving_review_count": 1, "dismiss_stale_reviews": true},
+>   "restrictions": null, "allow_force_pushes": false, "allow_deletions": false,
+>   "required_conversation_resolution": true }
+> JSON
+> ```
+
 ---
 
 ## ACT 1 — လက်ရှိနည်း: တိုက်ရိုက် merge (၃ မိနစ်)
