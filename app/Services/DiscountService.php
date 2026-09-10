@@ -6,18 +6,22 @@ use InvalidArgumentException;
 
 class DiscountService
 {
-    private const MAX_PERCENT = 100;
+    /** coupon code => လျှော့ရာခိုင်နှုန်း */
+    private const COUPONS = [
+        'DEVTALK' => 15,
+        'THINGYAN' => 30,
+        'VIP' => 150,
+    ];
 
-    /**
-     * ဈေးနှုန်း (ကျပ်) ပေါ်မှာ ရာခိုင်နှုန်းလျှော့ပြီး ပေးရမယ့်ငွေ ပြန်ပေးသည်။
-     */
-    public function finalPrice(int $priceMmk, int $percent): int
+    public function finalPrice(int $priceMmk, int $percent = 0, ?string $coupon = null): int
     {
         if ($priceMmk < 0) {
             throw new InvalidArgumentException('Price cannot be negative.');
         }
 
-        $percent = max(0, min(self::MAX_PERCENT, $percent));
+        if ($coupon !== null) {
+            $percent = $percent + (self::COUPONS[$coupon] ?? 0);
+        }
 
         return $priceMmk - (int) round($priceMmk * $percent / 100);
     }
