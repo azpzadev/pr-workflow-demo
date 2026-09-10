@@ -28,6 +28,9 @@ gh repo edit "$SLUG" \
   --delete-branch-on-merge
 
 echo "==> ၃။ main branch ကို ကာကွယ်နေသည်"
+# approvals=0 — GitHub မှာ ကိုယ့် PR ကို ကိုယ်တိုင် approve လုပ်လို့ မရလို့။
+# တစ်ယောက်တည်း demo လုပ်လို့ရအောင် ဒီလိုထားတာ။ တကယ့် team မှာ 1 ထားပါ။
+# CI gate ရော direct-push ပိတ်ထားတာရော ဒီအတိုင်း ကျန်နေသေးတယ်။
 # enforce_admins=true — owner ကိုယ်တိုင်တောင် တိုက်ရိုက် push မရအောင်။
 # (demo ရဲ့ အဓိက punchline ဒါ။ talk ပြီးရင် ပြန်ဖြုတ်ချင်ရင် အောက်က comment ကြည့်ပါ)
 gh api -X PUT "repos/$SLUG/branches/main/protection" \
@@ -40,7 +43,7 @@ gh api -X PUT "repos/$SLUG/branches/main/protection" \
   },
   "enforce_admins": true,
   "required_pull_request_reviews": {
-    "required_approving_review_count": 1,
+    "required_approving_review_count": 0,
     "dismiss_stale_reviews": true
   },
   "restrictions": null,
